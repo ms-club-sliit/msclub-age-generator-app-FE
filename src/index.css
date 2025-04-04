@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+
+/* common styles ==================== */
+button{
+    height: 50px;
+    padding: 0 40px;
+    font-weight: 600;
+    border-radius: 12px;
+}
