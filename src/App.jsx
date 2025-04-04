@@ -1,15 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './components/Home';
-import Camera from './components/Camera';
-import Preview from './components/Preview';
-import LandingPage from './pages/LandingPage';
+import Camera from './pages/Camera';
+import Preview from './pages/Preview';
+import Home from './pages/Home';
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<Home />} />
         <Route path="/camera" element={<Camera />} />
         <Route path="/preview" element={<Preview />} />
       </Routes>

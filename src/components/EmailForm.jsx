@@ -24,8 +24,7 @@ const EmailForm = () => {
     e.preventDefault();
     if (isValid) {
       setIsSubmitting(true);
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      localStorage.setItem('userEmail', email);
       navigate('/camera');
     }
   };

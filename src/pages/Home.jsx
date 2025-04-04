@@ -16,7 +16,7 @@ const FeatureCard = ({ icon: Icon, title, description, className = "" }) => (
   </div>
 );
 
-const LandingPage = () => {
+const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
       <Header />
@@ -101,4 +101,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default Home;
