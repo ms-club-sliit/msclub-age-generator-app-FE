@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     env:
-        VITE_WEBSOCKET_URL: "ws://imagesynth-hvb6epdaczh4fkbh.southindia-01.azurewebsites.net/ws/image"
+        VITE_WEBSOCKET_URL: "wss://imagesynth-hvb6epdaczh4fkbh.southindia-01.azurewebsites.net/ws/image"
     steps:
       - uses: actions/checkout@v3
         with:
