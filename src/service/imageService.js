@@ -1,6 +1,6 @@
 export const sendImageViaWebSocket = ({ email, image, type }) => {
     return new Promise((resolve, reject) => {
-      const socket = new WebSocket("ws://localhost:8000/ws/image");
+      const socket = new WebSocket(import.meta.env.VITE_WEBSOCKET_URL);
   
       socket.onopen = () => {
         const base64Data = image.replace(/^data:image\/[a-z]+;base64,/, "");
