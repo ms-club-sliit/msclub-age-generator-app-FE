@@ -1,26 +1,31 @@
-export const sendImageViaWebSocket = ({ email, image }) => {
+export const sendImageViaWebSocket = ({ email, image, type }) => {
     return new Promise((resolve, reject) => {
-        const ws = new WebSocket('YOUR_WEBSOCKET_API_URL');
-        console.log(JSON.stringify({ email, image })); //for debug
-        ws.onopen = () => {
-            const payload = JSON.stringify({ email, image });
-            //console.log(payload); // debug log
-            ws.send(payload);
-        };
-
-        ws.onmessage = (event) => {
-            try {
-                const data = JSON.parse(event.data);
-                resolve(data.image);
-            } catch (err) {
-                reject('Failed to parse WebSocket response');
-            } finally {
-                ws.close();
-            }
-        };
-
-        ws.onerror = (error) => {
-            reject(`WebSocket error: ${error.message}`);
-        };
+      const socket = new WebSocket("ws://localhost:8000/ws/image");
+  
+      socket.onopen = () => {
+        const base64Data = image.replace(/^data:image\/[a-z]+;base64,/, "");
+        socket.send(JSON.stringify({ email, type, image: base64Data }));
+      };
+  
+      socket.onmessage = (event) => {
+        const response = JSON.parse(event.data);
+  
+        if (response.status === "success" && response.generated_image) {
+          resolve(`data:image/png;base64,${response.generated_image}`);
+        } else {
+          reject(new Error(response.message || "Unknown WebSocket error"));
+        }
+  
+        socket.close();
+      };
+  
+      socket.onerror = (error) => {
+        reject(new Error("WebSocket error occurred"));
+      };
+  
+      socket.onclose = () => {
+        console.log("WebSocket connection closed");
+      };
     });
-};
+  };
+  
